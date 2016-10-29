@@ -41,6 +41,7 @@ def dispose(events):
         post_text(reply_token, text)
 
 def google(code):
+    print(type(code))
     print(code)
 
 
