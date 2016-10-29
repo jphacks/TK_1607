@@ -43,6 +43,8 @@ def dispose(events):
 def google(code):
     print(type(code))
     print(code)
+    print(code.GET())
+    print(code.GET.get('code'))
 
 
 class ViewSet(View):
