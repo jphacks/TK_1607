@@ -57,11 +57,13 @@ def docomo_api(text):
     }
 
     payload = {
-        "projectKey": " Ypteikun",
+        "projectKey": "Yoteikun",
          "appInfo": {
              "appName": "yoteikun_bot",
-             "appKey": "yoteikun_bot"},
-         "clientVer": "1.0.0", "dialogMode": "off",
+             "appKey": "yoteikun_bot"
+             },
+         "clientVer": "1.0.0",
+         "dialogMode": "off",
          "language": "ja",
         # "userId": "12 123456 123456 0", "location": {
         # "lat": "139.766084",
@@ -102,7 +104,6 @@ def docomo_api(text):
                 japan_date = re.sub(':','時',day_date,1)
                 japan_date = re.sub("T",'',japan_date,1)
                 japan_date += '分'
-                
         post_messages = japan_day + japan_date + japan_hour + 'のスケジュールはこちらです。'
         return post_messages
 
