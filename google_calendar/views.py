@@ -30,7 +30,7 @@ def get_access_token(auth_token):
 def check_schedule(key):
     SCHEDULE_ENDPOINT = 'https://www.googleapis.com/calendar/v3/calendars/'
     schedule_id = 'CoralGift.N.H@gmail.com'
-    CHECK_URL = SCHEDULE_ENDPOINT + schedule_id + '/?key=' + key
+    CHECK_URL = SCHEDULE_ENDPOINT + schedule_id + '/?access_token=' + key
     response = requests.get(CHECK_URL)
     print(response.json())
     return response.json()
