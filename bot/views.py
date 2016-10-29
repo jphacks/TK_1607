@@ -9,6 +9,7 @@ from django.views.generic import View
 import urllib
 from analyse.views import *
 from rest_framework.views import APIView
+from rest_framework.response import Response
 
 REPLY_ENDPOINT = 'https://api.line.me/v2/bot/message/reply'
 
