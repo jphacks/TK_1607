@@ -53,14 +53,14 @@ def userlocal_chat(text):
 
 def docomo_api(text):
     header = {
-        "content-type": "application/x-www-form-urlencoded",
+        "content-type": "application/json",
     }
 
     payload = {
-        "projectKey": "Yoteikun",
+        "projectKey": "OSU",
          "appInfo": {
-             "appName": "yoteikun_bot",
-             "appKey": "yoteikun_bot"
+             "appName": "yoteikun_app",
+             "appKey": "yoteikun_app01"
              },
          "clientVer": "1.0.0",
          "dialogMode": "off",
@@ -82,22 +82,20 @@ def docomo_api(text):
         return message
     elif response.json()["dialogStatus"]["command"]["commandId"] == "BT01302":  # スケジュール参照
         post_message_date = post_message_hour = post_message_day = japan_day = japan_date = japan_hour =  ""
-        print(response.json())
         for date in response.json()['dialogStatus']['slotStatus']:
-            print(date)
-            if date['valueType'] == 'datePnoun':
+            if 'valueType' in date and date['valueType'] == 'datePnoun':
                 date = date['slotValue']
                 post_message_day += get_time(date)
                 japan_day = re.sub('-','年',post_message_day,1)
                 japan_day = re.sub('-','月',japan_day,1)
                 japan_day += '日'
-            elif date['valueType'] == 'timeHour':
+            elif 'valueType' in date and date['valueType'] == 'timeHour':
                 hour = date['slotValue']
                 post_message_hour += get_time(hour)
                 hour_date = re.sub(post_message_day,'',post_message_hour)
                 japan_hour = re.sub("T",'',hour_date,1)
                 japan_hour += '時'
-            elif date['valueType'] == 'time':
+            elif 'valueType' in date and date['valueType'] == 'time':
                 day = date['slotValue']
                 post_message_date += get_time(day)
                 day_date = re.sub(post_message_day,'',post_message_date)
