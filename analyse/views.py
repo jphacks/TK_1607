@@ -110,5 +110,3 @@ def docomo_api(text):
         return post_messages
     else:
         return userlocal_chat(text)
-
-get_time('来週')
