@@ -29,7 +29,7 @@ def post_text(reply_token, text):
     requests.post(REPLY_ENDPOINT, headers=header, data=json.dumps(payload))
 
 def dispose(events):
-    print('This is dispose request')
+    print(events)
     for event in events:
         text = event['message']['text']
         reply_token = event['replyToken']

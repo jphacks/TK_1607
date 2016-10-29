@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     # greater consistency between gunicorn and `./manage.py runserver`. See:
     'django.contrib.staticfiles',
     'bot',
-    'analyse'
+    'analyse',
+    'google_calendar'
     #'debug_toolbar',
 ]
 
