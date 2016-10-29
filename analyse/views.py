@@ -106,7 +106,7 @@ def docomo_api(text):
                 japan_date = re.sub("T",'',japan_date,1)
                 japan_date += '分'
         post_messages = japan_day + japan_date + japan_hour + 'のスケジュールはこちらです。'
-        key = 'ya29.Ci-KA1m7vcKnOINNqMsUv-dAlAusp0U9TANL5NifHvM3I-dsoDOhNF7xfcoX_euFGQ'
+        key = 'ya29.Ci-KA0OpPVNtKcWFW3HilKsBvVxeISwjdY8h5qAIv9-D_w7wcSfhOSxLZBwl2puc2w'
         schedule_data = check_schedule(key,schedule_date)
         print(schedule_data)
         return post_messages
