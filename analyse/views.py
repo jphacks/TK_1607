@@ -88,6 +88,7 @@ def docomo_api(text):
         for date in response.json()['dialogStatus']['slotStatus']:
             if 'valueType' in date and date['valueType'] == 'datePnoun':
                 date = date['slotValue']
+                schedule_date = date['slotValue']
                 post_message_day += get_time(date)
                 japan_day = re.sub('-','年',post_message_day,1)
                 japan_day = re.sub('-','月',japan_day,1)
@@ -107,8 +108,7 @@ def docomo_api(text):
                 japan_date += '分'
         post_messages = japan_day + japan_date + japan_hour + 'のスケジュールはこちらです。'
         key = 'ya29.Ci-KA1m7vcKnOINNqMsUv-dAlAusp0U9TANL5NifHvM3I-dsoDOhNF7xfcoX_euFGQ'
-        print(date)
-        schedule_data = check_schedule(key,date)
+        schedule_data = check_schedule(key,schedule_date)
         print(schedule_data)
         return post_messages
     elif response.json()["dialogStatus"]["command"]["commandId"] == "BT00301":  # 天気予報（今の所さいたま市）
