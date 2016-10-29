@@ -106,5 +106,3 @@ def docomo_api(text):
         return post_messages
     else:
         return userlocal_chat(text)
-
-docomo_api(text)
