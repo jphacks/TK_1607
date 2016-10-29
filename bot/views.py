@@ -22,7 +22,7 @@ def post_text(reply_token, text):
           "messages":[
                 {
                     "type":"text",
-                    "text": docomo_api(text),
+                    "text":docomo_api(text),
                 }
             ]
     }
