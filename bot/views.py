@@ -41,10 +41,7 @@ def dispose(events):
         post_text(reply_token, text)
 
 def google(code):
-    print(type(code))
     print(code)
-    print(code.GET())
-    print(code.GET.get('code'))
 
 
 class ViewSet(View):
@@ -52,8 +49,7 @@ class ViewSet(View):
 
     def get(self, request, *args, **kwargs):
         code = request.GET['code']
-        print(code)
-        google(request)
+        google(code)
         return JsonResponse({'Successfully': 'Connected!'})
 
     def post(self, request, *args, **kwargs):

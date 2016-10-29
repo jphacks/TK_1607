@@ -38,6 +38,3 @@ events_results = service.events().list(
 events = events_results.get('items', [])
 for event in events:
     print(event)
-
-
-https://accounts.google.com/o/oauth2/auth?client_id=723758082242-d2ce0mh1jvrfrnicgb6k8ds1j7o91ite.apps.googleusercontent.com&redirect_uri=https://yoteikun.herokuapp.com/callback&scope=https://www.googleapis.com/auth/calendar&response_type=code

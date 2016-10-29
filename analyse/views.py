@@ -114,7 +114,7 @@ def docomo_api(text):
         if response.json()["dialogStatus"]["slotStatus"][0]["valueType"]=='address':  #地名を検出したか
             place = response.json()['dialogStatus']['slotStatus'][0]['slotValue']  # 地名が検出できて入れば，placeに代入
 
-            FILEIN = 'chimei.json'  # jsonファイルから情報を取り出してdataに代入
+            FILEIN = './chimei.json'  # jsonファイルから情報を取り出してdataに代入
             f = open(FILEIN, 'r')
             data = json.load(f)
 
