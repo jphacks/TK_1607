@@ -38,7 +38,9 @@ def dispose(events):
         post_text(reply_token, text)
 
 def google(request):
-    print(request)
+    for key in request.GET:
+		post_text(request.GET[key])
+	return
 
 
 class ViewSet(View):
