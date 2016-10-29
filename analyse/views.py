@@ -82,6 +82,7 @@ def docomo_api(text):
         post_message_date = post_message_hour = post_message_day = japan_day = japan_date = japan_hour =  ""
         print(response.json())
         for date in response.json()['dialogStatus']['slotStatus']:
+            print(date)
             if date['valueType'] == 'datePnoun':
                 date = date['slotValue']
                 post_message_day += get_time(date)
