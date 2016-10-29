@@ -30,6 +30,7 @@ def post_text(reply_token, text):
     }
     requests.post(REPLY_ENDPOINT, headers=header, data=json.dumps(payload))
 
+
 def dispose(events):
     print(events)
     for event in events:
@@ -46,7 +47,8 @@ def google(code):
 class ViewSet(View):
     http_method_names = ['get', 'post']
 
-    def get(self, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
+        google(request)
         return JsonResponse({'Successfully': 'Connected!'})
 
     def post(self, request, *args, **kwargs):
