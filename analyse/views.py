@@ -104,6 +104,17 @@ def docomo_api(text):
                 japan_date += '分'
         post_messages = japan_day + japan_date + japan_hour + 'のスケジュールはこちらです。'
         return post_messages
+    elif response.json()["dialogStatus"]["command"]["commandId"] == "BT00301":  # 天気予報（今の所さいたま市）
+        WEATHER_ENDPOINT = "http://weather.livedoor.com/forecast/webservice/json/v1?city=110010"
+        header = {"content-type": "application/json"}
 
+        response = requests.get(WEATHER_ENDPOINT)
+
+        tenki = response.json()['title'] + 'は' + response.json()['forecasts'][0]['telop'] + "だって！\n"
+        kaisetsu = (response.json()['description']['text'])
+
+        output = tenki + kaisetsu
+
+        return output
     else:
         return userlocal_chat(text)
