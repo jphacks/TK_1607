@@ -39,10 +39,8 @@ def dispose(events):
         user_id = event['source']['userId']
         post_text(reply_token, text)
 
-class DetaGet(APIView):
-    def get(self,request):
-        post_text(request)
-        print(request)
+def google(code):
+    print(code)
 
 
 class ViewSet(View):
