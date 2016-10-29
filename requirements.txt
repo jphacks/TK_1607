@@ -2,3 +2,4 @@ virtualenv
 Django
 gunicorn
 requests
+djangorestframework

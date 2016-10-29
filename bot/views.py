@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from django.views.generic import View
 import urllib
 from analyse.views import *
+from rest_framework.views import APIView
 
 REPLY_ENDPOINT = 'https://api.line.me/v2/bot/message/reply'
 
@@ -37,10 +38,10 @@ def dispose(events):
         user_id = event['source']['userId']
         post_text(reply_token, text)
 
-def google(request):
-    for key in request.GET:
-		post_text(request.GET[key])
-	return
+class DetaGet(APIView):
+    def get(self,request):
+        print(request)
+	    return Response("hallo")
 
 
 class ViewSet(View):
