@@ -103,10 +103,9 @@ def docomo_api(text):
                 japan_date = re.sub("T",'',japan_date,1)
                 japan_date += '分'
             else:
-                return
-
-
+                return None
         post_messages = japan_day + japan_date + japan_hour + 'のスケジュールはこちらです。'
         return post_messages
+
     else:
         return userlocal_chat(text)
