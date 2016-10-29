@@ -41,6 +41,7 @@ def dispose(events):
 
 class DetaGet(APIView):
     def get(self,request):
+        post_text(request)
         print(request)
 
 

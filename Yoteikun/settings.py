@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bot',
     'analyse',
-    'google_calendar'
+    'google_calendar',
+    'rest_framework'
     #'debug_toolbar',
 ]
 
