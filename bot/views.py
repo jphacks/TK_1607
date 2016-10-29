@@ -51,7 +51,7 @@ class ViewSet(View):
     http_method_names = ['get', 'post']
 
     def get(self, request, *args, **kwargs):
-        code = request.GET('code','')
+        code = request.GET('code')
         print(code)
         google(request)
         return JsonResponse({'Successfully': 'Connected!'})
