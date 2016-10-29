@@ -37,6 +37,9 @@ def dispose(events):
         user_id = event['source']['userId']
         post_text(reply_token, text)
 
+def google(request):
+    print(request)
+
 
 class ViewSet(View):
     http_method_names = ['get', 'post']
