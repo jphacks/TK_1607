@@ -42,7 +42,6 @@ def dispose(events):
 class DetaGet(APIView):
     def get(self,request):
         print(request)
-	    return Response("hallo")
 
 
 class ViewSet(View):
