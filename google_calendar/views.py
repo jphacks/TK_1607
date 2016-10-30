@@ -94,11 +94,15 @@ def add_schedule(key,schedule_body,apo_date):
     "Authorization":"Bearer " + key
     }
     payload = {
-        'key':key,
+        'client_id': client_id,
+         'grant_type':"authorization_code",
+         'client_secret': client_secret,
+         'code': auth_token,
+        'access_token':key,
         'start':apo_date,
         'summary':schedule_body,
     }
-    response = requests.post(SCHEDULE_ENDPOINT,data=json.dumps(payload))
+    response = requests.post(SCHEDULE_ENDPOINT,data=payload)
     print(response)
     print(response.json())
     return response
