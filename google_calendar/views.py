@@ -46,6 +46,7 @@ def get_access_token(auth_token):
          'client_secret': client_secret,
          'redirect_uri': redirect_uri,
          'code': auth_token,
+         'approval_prompt':'force',
     }
     response = requests.post(TOKEN_ENDPOINT,headers=header,data=payload)
     print(response.json())
