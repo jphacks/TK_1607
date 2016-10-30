@@ -8,6 +8,7 @@ import requests
 import json
 import re
 from datetime import datetime as dts
+from analyse.views import *
 
 ### 参考資料はこちら
 # https://developers.google.com/google-apps/calendar/quickstart/python
@@ -34,8 +35,8 @@ def get_access_token(auth_token):
 def check_schedule(key,datevalue):
     schedule_id = 'CoralGift.N.H@gmail.com'
     SCHEDULE_ENDPOINT = 'https://www.googleapis.com/calendar/v3/calendars/' + schedule_id + '/events'
-    schedule_date_min = datevalue + 'T00:00:00Z'
-    schedule_date_max = datevalue + 'T23:59:59Z'
+    schedule_date_min = get_time(datevalue) + 'T00:00:00Z'
+    schedule_date_max = get_time(datevalue) + 'T23:59:59Z'
     print(schedule_date_max)
     print(schedule_date_min)
     payload = {
