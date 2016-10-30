@@ -91,10 +91,11 @@ def add_schedule(key,schedule_body,apo_date):
     schedule_id = 'CoralGift.N.H@gmail.com'
     SCHEDULE_ENDPOINT = 'https://www.googleapis.com/calendar/v3/calendars/' + schedule_id + '/events?key=' + key
     payload = {
+        'key':key,
         'start':apo_date,
         'summary':schedule_body,
     }
-    response = requests.post(SCHEDULE_ENDPOINT,params=payload)
+    response = requests.post(SCHEDULE_ENDPOINT,data=json.dumps(payload))
     print(response)
     print(response.json())
     return response
