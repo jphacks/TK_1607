@@ -79,6 +79,8 @@ def docomo_api(text):
         headers=header)
 
     if response.json()["dialogStatus"]["command"]["commandId"] == "BT01301":  # スケジュール登録
+    
+        print(response.json())
         message = 'スケジュールを登録しました。'
         return message
     elif response.json()["dialogStatus"]["command"]["commandId"] == "BT01302":  # スケジュール参照
