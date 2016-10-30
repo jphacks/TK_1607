@@ -16,6 +16,8 @@ userlocal_api_key = '97e9f233f7b9e0051657'
 docomo_api_key = "4a795447764c4d70632e552f594350714c7875634f4b57596f75675049612f73422f55774b69356b346139"
 DOCOMOAPI_ENDPOINT = "https://api.apigw.smt.docomo.ne.jp/sentenceUnderstanding/v1/task?APIKEY=" + docomo_api_key
 
+key = 'ya29.CjCKA5081Uc4fJgluxWWriW8c7izpF0bvjcLfjVLkYwAM5ss15CA04AHeiZU-QlUDNQ'
+
 
 def get_time(text):
     message = ""
@@ -79,10 +81,16 @@ def docomo_api(text):
         headers=header)
 
     if response.json()["dialogStatus"]["command"]["commandId"] == "BT01301":  # スケジュール登録
-    
+        apo_date = get_time(response.json()['dialogStatus']['slotStatus'][1]['slotValue'])
+        schedule_body = response.json()['dialogStatus']['slotStatus'][2]['slotValue']
         print(response.json())
-        message = 'スケジュールを登録しました。'
-        return message
+        res = add_schedule(key,schedule_body,apo_date)
+        if res = '<200>':
+            message = 'スケジュールを登録しました。'
+            return message
+        else:
+            message = 'スケジュールの登録に失敗しました。'
+            return message
     elif response.json()["dialogStatus"]["command"]["commandId"] == "BT01302":  # スケジュール参照
         post_message_date = post_message_hour = post_message_day = japan_day = japan_date = japan_hour =  ""
         for date in response.json()['dialogStatus']['slotStatus']:
@@ -106,7 +114,6 @@ def docomo_api(text):
                 japan_date = re.sub("T",'',japan_date,1)
                 japan_date += '分'
         post_messages = japan_day + japan_date + japan_hour + 'のスケジュールはこちらです。'
-        key = 'ya29.CjCKA1Fd9ACB1sLCElrAYpWDjlXCCdOdgA6SK34C8DS194yBg-fsikRtO8uqKKE9vI0'
         schedule_data = check_schedule(key,schedule_date)
         message = post_messages + '\n' + schedule_data
         print(schedule_data)

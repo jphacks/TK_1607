@@ -85,3 +85,15 @@ def check_schedule(key,datevalue):
 
 #    return response.json()
         return postage
+
+def add_schedule(key,schedule_body,apo_date):
+    schedule_id = 'CoralGift.N.H@gmail.com'
+    SCHEDULE_ENDPOINT = 'https://www.googleapis.com/calendar/v3/calendars/' + schedule_id + '/events'
+    payload = {
+        'access_token':key,
+        'start':apo_date,
+        'summary':schedule_body,
+    }
+    response = requests.post(SCHEDULE_ENDPOINT,data=payload)
+    print(response)
+    return response
