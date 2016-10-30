@@ -17,7 +17,6 @@ docomo_api_key = "4a795447764c4d70632e552f594350714c7875634f4b57596f75675049612f
 DOCOMOAPI_ENDPOINT = "https://api.apigw.smt.docomo.ne.jp/sentenceUnderstanding/v1/task?APIKEY=" + docomo_api_key
 
 
-
 def get_time(text):
     message = ""
     header = {
@@ -34,7 +33,6 @@ def get_time(text):
         )
     for datetime in response.json()["datetime_list"]:
         return datetime[1]
-
 
 
 def userlocal_chat(text):
@@ -110,7 +108,7 @@ def docomo_api(text):
         schedule_data = check_schedule(key,schedule_date)
         print(schedule_data)
         return post_messages
-    elif response.json()["dialogStatus"]["command"]["commandId"] == "BT00301":  # 天気予報（今の所さいたま市）
+    elif response.json()["dialogStatus"]["command"]["commandId"] == "BT00301":  # 天気予報
         WEATHER_ENDPOINT_BETA = "http://weather.livedoor.com/forecast/webservice/json/v1?city="
         header = {"content-type": "application/json"}
 
