@@ -5,7 +5,7 @@ import random
 import requests
 import urllib
 import re
-#from google_calendar.views import *
+from google_calendar.views import *
 
 CHRONO_ENDPOINT = 'https://labs.goo.ne.jp/api/chrono'
 goo_app_id = 'c22ffb5d21ac50aef26f11a851acd86724b17225e750aa273d0c3c2be9b2a8b5'
@@ -15,7 +15,6 @@ userlocal_api_key = '97e9f233f7b9e0051657'
 
 docomo_api_key = "4a795447764c4d70632e552f594350714c7875634f4b57596f75675049612f73422f55774b69356b346139"
 DOCOMOAPI_ENDPOINT = "https://api.apigw.smt.docomo.ne.jp/sentenceUnderstanding/v1/task?APIKEY=" + docomo_api_key
-
 
 
 def get_time(text):
@@ -34,7 +33,6 @@ def get_time(text):
         )
     for datetime in response.json()["datetime_list"]:
         return datetime[1]
-
 
 
 def userlocal_chat(text):
@@ -110,7 +108,7 @@ def docomo_api(text):
         schedule_data = check_schedule(key,schedule_date)
         print(schedule_data)
         return post_messages
-    elif response.json()["dialogStatus"]["command"]["commandId"] == "BT00301":  # 天気予報（今の所さいたま市）
+    elif response.json()["dialogStatus"]["command"]["commandId"] == "BT00301":  # 天気予報
         WEATHER_ENDPOINT_BETA = "http://weather.livedoor.com/forecast/webservice/json/v1?city="
         header = {"content-type": "application/json"}
 
