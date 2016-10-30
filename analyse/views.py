@@ -85,7 +85,7 @@ def docomo_api(text):
         schedule_body = response.json()['dialogStatus']['slotStatus'][2]['slotValue']
         print(response.json())
         res = add_schedule(key,schedule_body,apo_date)
-        if res == '<200>':
+        if res == '<Response [401]>':
             message = 'スケジュールを登録しました。'
             return message
         else:

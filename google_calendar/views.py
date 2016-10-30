@@ -96,4 +96,5 @@ def add_schedule(key,schedule_body,apo_date):
     }
     response = requests.post(SCHEDULE_ENDPOINT,data=payload)
     print(response)
+    print(response.json())
     return response
