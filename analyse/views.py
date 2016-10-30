@@ -5,7 +5,7 @@ import random
 import requests
 import urllib
 import re
-
+from google_calendar.views import *
 
 CHRONO_ENDPOINT = 'https://labs.goo.ne.jp/api/chrono'
 goo_app_id = 'c22ffb5d21ac50aef26f11a851acd86724b17225e750aa273d0c3c2be9b2a8b5'
@@ -87,7 +87,7 @@ def docomo_api(text):
         post_message_date = post_message_hour = post_message_day = japan_day = japan_date = japan_hour =  ""
         for date in response.json()['dialogStatus']['slotStatus']:
             if 'valueType' in date and date['valueType'] == 'datePnoun':
-                date = date['slotValue']
+                schedule_date = date = date['slotValue']
                 post_message_day += get_time(date)
                 japan_day = re.sub('-','年',post_message_day,1)
                 japan_day = re.sub('-','月',japan_day,1)
@@ -106,6 +106,9 @@ def docomo_api(text):
                 japan_date = re.sub("T",'',japan_date,1)
                 japan_date += '分'
         post_messages = japan_day + japan_date + japan_hour + 'のスケジュールはこちらです。'
+        key = 'ya29.Ci-KA0OpPVNtKcWFW3HilKsBvVxeISwjdY8h5qAIv9-D_w7wcSfhOSxLZBwl2puc2w'
+        schedule_data = check_schedule(key,schedule_date)
+        print(schedule_data)
         return post_messages
     elif response.json()["dialogStatus"]["command"]["commandId"] == "BT00301":  # 天気予報（今の所さいたま市）
         WEATHER_ENDPOINT_BETA = "http://weather.livedoor.com/forecast/webservice/json/v1?city="
@@ -114,7 +117,7 @@ def docomo_api(text):
         if 'valueType' in response.json()['dialogStatus']['slotStatus'][0]:  #地名を検出したか
             place = response.json()['dialogStatus']['slotStatus'][0]['slotValue']  # 地名が検出できて入れば，placeに代入
 
-            FILEIN = 'chimei.json'  # jsonファイルから情報を取り出してdataに代入
+            FILEIN = './chimei.json'  # jsonファイルから情報を取り出してdataに代入
             f = open(FILEIN, 'r')
             data = json.load(f)
 

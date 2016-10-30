@@ -3,3 +3,8 @@ Django
 gunicorn
 requests
 djangorestframework
+oauth2client
+oauthlib
+httplib2
+google
+google-api-python-client

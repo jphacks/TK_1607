@@ -4,10 +4,11 @@ import os
 import json
 import random
 import requests
-from django.http import JsonResponse
+from django.http import *
 from django.views.generic import View
 import urllib
 from analyse.views import *
+from google_calendar.views import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -41,7 +42,7 @@ def dispose(events):
         post_text(reply_token, text)
 
 def google(code):
-    print(type(code))
+    get_access_token(code)
     print(code)
 
 
@@ -49,8 +50,9 @@ class ViewSet(View):
     http_method_names = ['get', 'post']
 
     def get(self, request, *args, **kwargs):
-        google(request)
-        return JsonResponse({'Successfully': 'Connected!'})
+        code = request.GET['code']
+        google(code)
+        return HttpResponse("認証に成功しました。この画面を閉じてください。")
 
     def post(self, request, *args, **kwargs):
         dispose(json.loads(request.body.decode("utf-8"))['events'])
