@@ -106,8 +106,9 @@ def docomo_api(text):
         post_messages = japan_day + japan_date + japan_hour + 'のスケジュールはこちらです。'
         key = 'ya29.CjCKA1Fd9ACB1sLCElrAYpWDjlXCCdOdgA6SK34C8DS194yBg-fsikRtO8uqKKE9vI0'
         schedule_data = check_schedule(key,schedule_date)
+        message = post_messages + '\n' + schedule_data
         print(schedule_data)
-        return post_messages , schedule_data
+        return message
     elif response.json()["dialogStatus"]["command"]["commandId"] == "BT00301":  # 天気予報
         WEATHER_ENDPOINT_BETA = "http://weather.livedoor.com/forecast/webservice/json/v1?city="
         header = {"content-type": "application/json"}
