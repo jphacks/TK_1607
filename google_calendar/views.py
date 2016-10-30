@@ -10,8 +10,27 @@ import re
 from datetime import datetime as dts
 from analyse.views import *
 
-### 参考資料はこちら
-# https://developers.google.com/google-apps/calendar/quickstart/python
+
+CHRONO_ENDPOINT = 'https://labs.goo.ne.jp/api/chrono'
+goo_app_id = 'c22ffb5d21ac50aef26f11a851acd86724b17225e750aa273d0c3c2be9b2a8b5'
+
+def get_time(text):
+    message = ""
+    header = {
+        "content-type": "application/json",
+    }
+    payload = {
+          "app_id": goo_app_id,
+          "sentence": text,
+    }
+    response = requests.post(
+        CHRONO_ENDPOINT,
+        data=json.dumps(payload),
+        headers=header
+        )
+    for datetime in response.json()["datetime_list"]:
+        return datetime[1]
+
 client_id = '723758082242-d2ce0mh1jvrfrnicgb6k8ds1j7o91ite.apps.googleusercontent.com'
 client_secret = '_dC6GVvnDa7Fx-hH2G7yYr3D'
 authorization_code='4/0clQDihNdWSoGnV14OBze2ijDWVOMMlsd0CF8ZKMHHA'
