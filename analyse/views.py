@@ -5,7 +5,7 @@ import random
 import requests
 import urllib
 import re
-from google_calendar.views import *
+#from google_calendar.views import *
 
 CHRONO_ENDPOINT = 'https://labs.goo.ne.jp/api/chrono'
 goo_app_id = 'c22ffb5d21ac50aef26f11a851acd86724b17225e750aa273d0c3c2be9b2a8b5'
