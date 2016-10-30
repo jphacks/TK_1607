@@ -34,12 +34,12 @@ def get_access_token(auth_token):
 def check_schedule(key,datevalue):
     schedule_id = 'CoralGift.N.H@gmail.com'
     SCHEDULE_ENDPOINT = 'https://www.googleapis.com/calendar/v3/calendars/' + schedule_id + '/events'
-    schedule_date_min = '2016-10-27T00:00:00Z'
-    schedule_data_max = '2016-10-31T00:00:00Z'
+    schedule_date_min = datevalue + 'T00:00:00Z'
+    schedule_date_max = datevalue + 'T23:59:59Z'
     payload = {
         'access_token':key,
-        'timeMax':schedule_data_max,
-        'timeMin':schedule_date_max,
+        'timeMax':schedule_date_max,
+        'timeMin':schedule_date_min,
         'orderBy':'startTime',
         'singleEvents':'true',
     }
