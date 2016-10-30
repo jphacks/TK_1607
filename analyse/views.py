@@ -16,7 +16,7 @@ userlocal_api_key = '97e9f233f7b9e0051657'
 docomo_api_key = "4a795447764c4d70632e552f594350714c7875634f4b57596f75675049612f73422f55774b69356b346139"
 DOCOMOAPI_ENDPOINT = "https://api.apigw.smt.docomo.ne.jp/sentenceUnderstanding/v1/task?APIKEY=" + docomo_api_key
 
-key = 'ya29.CjCKA5081Uc4fJgluxWWriW8c7izpF0bvjcLfjVLkYwAM5ss15CA04AHeiZU-QlUDNQ'
+key = 'ya29.CjCKAxerh0SNzrrhTv6KbMRbsmBlN2CL22F4sHvgcQ6b19kop5c14fhw61DtJPCzF9A'
 
 
 def get_time(text):
