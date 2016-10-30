@@ -36,6 +36,8 @@ def check_schedule(key,datevalue):
     SCHEDULE_ENDPOINT = 'https://www.googleapis.com/calendar/v3/calendars/' + schedule_id + '/events'
     schedule_date_min = datevalue + 'T00:00:00Z'
     schedule_date_max = datevalue + 'T23:59:59Z'
+    print(schedule_date_max)
+    print(schedule_date_min)
     payload = {
         'access_token':key,
         'timeMax':schedule_date_max,
@@ -47,6 +49,7 @@ def check_schedule(key,datevalue):
 #    CHECK_URL = SCHEDULE_ENDPOINT + schedule_id + '/events/?access_token=' + key + '&maxResults=1'
 #    response = requests.get(CHECK_URL)
     response = requests.get(SCHEDULE_ENDPOINT,params=payload)
+    print(response)
     for i in range(len(response.json()['items'])):
         postage = ''
         summary = '【予定】' + response.json()['items'][i]['summary']
