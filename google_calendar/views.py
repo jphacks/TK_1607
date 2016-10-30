@@ -4,6 +4,10 @@ from oauth2client.service_account import ServiceAccountCredentials
 import apiclient
 import requests
 import json
+import requests
+import json
+import re
+from datetime import datetime as dts
 
 ### 参考資料はこちら
 # https://developers.google.com/google-apps/calendar/quickstart/python
@@ -27,10 +31,34 @@ def get_access_token(auth_token):
     print(response.json())
     return response.json()['access_token']
 
-def check_schedule(key,date):
-    SCHEDULE_ENDPOINT = 'https://www.googleapis.com/calendar/v3/calendars/'
+def check_schedule(key,datevalue):
     schedule_id = 'CoralGift.N.H@gmail.com'
-    CHECK_URL = SCHEDULE_ENDPOINT + schedule_id + '/events/?access_token=' + key + '&timeMax=' + date + '&timeMin=' + date
-    response = requests.get(CHECK_URL)
-    print(response.json())
-    return response.json()
+    SCHEDULE_ENDPOINT = 'https://www.googleapis.com/calendar/v3/calendars/' + schedule_id + '/events'
+    schedule_date_min = '2016-10-27T00:00:00Z'
+    schedule_data_max = '2016-10-31T00:00:00Z'
+    payload = {
+        'access_token':key,
+        'timeMax':schedule_data_max,
+        'timeMin':schedule_date_max,
+        'orderBy':'startTime',
+        'singleEvents':'true',
+    }
+
+#    CHECK_URL = SCHEDULE_ENDPOINT + schedule_id + '/events/?access_token=' + key + '&maxResults=1'
+#    response = requests.get(CHECK_URL)
+    response = requests.get(SCHEDULE_ENDPOINT,params=payload)
+    for i in range(len(response.json()['items'])):
+        postage = ''
+        summary = '【予定】' + response.json()['items'][i]['summary']
+        start_time =  '\n【開始時刻】' + response.json()['items'][i]['start']['dateTime'][0:17] + 'から'
+        end_time = '\n【終了時刻】' + response.json()['items'][i]['end']['dateTime'][0:17] + 'まで\n'
+        postage = summary + start_time + end_time
+        for i in range(2):
+            postage = re.sub('-','年',postage,1)
+            postage = re.sub('-','月',postage,1)
+            postage = re.sub('T','日',postage,1)
+            postage = re.sub(':','時',postage,1)
+            postage = re.sub(":",'分',postage,1)
+
+#    return response.json()
+        return postage
