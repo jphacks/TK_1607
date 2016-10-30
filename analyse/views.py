@@ -111,7 +111,7 @@ def docomo_api(text):
         WEATHER_ENDPOINT_BETA = "http://weather.livedoor.com/forecast/webservice/json/v1?city="
         header = {"content-type": "application/json"}
 
-        if response.json()["dialogStatus"]["slotStatus"][0]["valueType"]=='address':  #地名を検出したか
+        if 'valueType' in response.json()['dialogStatus']['slotStatus'][0]:  #地名を検出したか
             place = response.json()['dialogStatus']['slotStatus'][0]['slotValue']  # 地名が検出できて入れば，placeに代入
 
             FILEIN = 'chimei.json'  # jsonファイルから情報を取り出してdataに代入
@@ -119,9 +119,7 @@ def docomo_api(text):
             data = json.load(f)
 
             if place in data:  # ユーザからもらった地名がjsonデータにあるかをチェック。なければ東京の天気を返す
-                print('地名発見！')
                 WEATHER_ENDPOINT = WEATHER_ENDPOINT_BETA + data[place]
-                print("urlは" + WEATHER_ENDPOINT)
                 response = requests.get(WEATHER_ENDPOINT)
                 tenki = place + 'は' + response.json()['forecasts'][0]['telop'] + "だって！\n"
                 kaisetsu = (response.json()['description']['text'])
@@ -130,7 +128,7 @@ def docomo_api(text):
             else:  #地名は取得できたけどjsonデータにない時
                 WEATHER_ENDPOINT = 'http://weather.livedoor.com/forecast/webservice/json/v1?city=' + "130010"
                 response = requests.get(WEATHER_ENDPOINT)
-                tenki = '地名が分からないから，東京の天気を表示します。東京は' + response.json()['forecasts'][0]['telop'] + "だって！\n"
+                tenki = '地名が分からないので，東京の天気を表示します。県名には「県」を入れてください！東京は' + response.json()['forecasts'][0]['telop'] + "だって！\n"
                 kaisetsu = (response.json()['description']['text'])
                 output = tenki + kaisetsu
                 return output
